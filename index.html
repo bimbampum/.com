@@ -1,0 +1,2062 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>.com — DESIGNED BY UKRAINIANS | WORN EVERYWHERE</title>
+
+    <style>
+        :root {
+            --black: #000000;
+            --white: #ffffff;
+            --accent: #FF3B00;
+            --grey-light: #f5f5f5;
+            --grey-mid: #888888;
+            --grey-dark: #222222;
+            --font-display: Helvetica, Arial, sans-serif;
+            --font-body: Helvetica, Arial, sans-serif;
+            --font-logo: Helvetica, Arial, sans-serif;
+            --nav-height: 56px;
+            --announcement-height: 38px;
+            --radius-sm: 2px;
+            --radius-pill: 20px;
+            --transition: 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background: var(--white);
+            color: var(--black);
+            overflow-x: hidden;
+        }
+
+        /* ANNOUNCEMENT BAR */
+        .announcement-bar {
+            background: var(--black);
+            color: var(--white);
+            height: var(--announcement-height);
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            animation: slideDown 0.6s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+            }
+
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        .marquee-container {
+            flex: 1;
+            overflow: hidden;
+        }
+
+        .marquee {
+            display: flex;
+            animation: marquee 30s linear infinite;
+            white-space: nowrap;
+        }
+
+        .marquee span {
+            font-size: 11px;
+            letter-spacing: 0.5px;
+            padding: 0 40px;
+        }
+
+        @keyframes marquee {
+            from {
+                transform: translateX(0);
+            }
+
+            to {
+                transform: translateX(-50%);
+            }
+        }
+
+        .close-announcement {
+            position: absolute;
+            right: 16px;
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 18px;
+            cursor: pointer;
+            padding: 4px 8px;
+        }
+
+        /* NAVIGATION */
+        nav {
+            background: var(--white);
+            height: var(--nav-height);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 24px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid #e5e5e5;
+        }
+
+        .logo-lockup {
+            font-family: var(--font-logo);
+            font-size: 24px;
+            color: var(--black);
+            text-decoration: none;
+            display: flex;
+            align-items: baseline;
+            gap: 0;
+        }
+
+        .logo-dot {
+            font-size: 32px;
+            line-height: 0.8;
+        }
+
+        .logo-com {
+            font-size: 24px;
+        }
+
+        .nav-center {
+            display: flex;
+            gap: 32px;
+        }
+
+        .nav-center a {
+            font-family: var(--font-body);
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--black);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .nav-center a:hover {
+            color: var(--accent);
+        }
+
+        .nav-right {
+            display: flex;
+            gap: 24px;
+            align-items: center;
+        }
+
+        .nav-right a,
+        .cart-btn {
+            font-family: var(--font-body);
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--black);
+            text-decoration: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .nav-right a:hover,
+        .cart-btn:hover {
+            color: var(--accent);
+        }
+
+        .cart-count {
+            font-size: 10px;
+            background: var(--accent);
+            color: var(--white);
+            border-radius: 50%;
+            width: 16px;
+            height: 16px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 4px;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 4px;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hamburger span {
+            width: 24px;
+            height: 2px;
+            background: var(--black);
+        }
+
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: var(--black);
+            z-index: 200;
+            padding: 80px 32px;
+            flex-direction: column;
+            gap: 32px;
+        }
+
+        .mobile-menu.active {
+            display: flex;
+        }
+
+        .mobile-menu a {
+            font-family: var(--font-display);
+            font-size: 32px;
+            color: var(--white);
+            text-decoration: none;
+            text-transform: uppercase;
+        }
+
+        .mobile-close {
+            position: absolute;
+            top: 24px;
+            right: 24px;
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 32px;
+            cursor: pointer;
+        }
+
+        /* HERO SECTION */
+        .hero {
+            display: grid;
+            grid-template-columns: 65% 35%;
+            min-height: calc(100vh - var(--nav-height) - var(--announcement-height));
+            opacity: 0;
+            animation: fadeIn 0.6s ease 0.2s forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        .hero-left {
+            position: relative;
+            background: var(--black);
+            overflow: hidden;
+        }
+
+        .hero-left img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hero-overlay-text {
+            position: absolute;
+            bottom: 40px;
+            left: 40px;
+            right: 40px;
+            font-family: var(--font-display);
+            font-size: clamp(48px, 8vw, 96px);
+            line-height: 0.9;
+            color: var(--white);
+            opacity: 0.15;
+            text-transform: uppercase;
+            pointer-events: none;
+        }
+
+        .hero-right {
+            background: var(--white);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 60px 40px;
+        }
+
+        .hero-headline {
+            font-family: var(--font-display);
+            font-size: clamp(32px, 4vw, 48px);
+            line-height: 1;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+        }
+
+        .hero-subline {
+            font-family: var(--font-body);
+            font-size: 14px;
+            color: var(--grey-mid);
+            margin-bottom: 40px;
+        }
+
+        .cta-btn {
+            background: var(--black);
+            color: var(--white);
+            font-family: var(--font-display);
+            font-size: 16px;
+            text-transform: uppercase;
+            border: none;
+            padding: 16px 32px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .cta-btn:hover {
+            background: var(--accent);
+        }
+
+        /* BRAND STORY SECTION */
+        .brand-story {
+            background: var(--black);
+            color: var(--white);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            padding: 120px 60px;
+            position: relative;
+        }
+
+        .story-left {
+            font-family: var(--font-display);
+            font-size: clamp(64px, 10vw, 120px);
+            line-height: 0.85;
+            text-transform: uppercase;
+        }
+
+        .story-right {
+            font-family: var(--font-body);
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        .story-right p {
+            margin-bottom: 24px;
+        }
+
+        .highlight {
+            background: rgba(0, 255, 0, 0.15);
+            padding: 4px 8px;
+            display: inline-block;
+        }
+
+        .section-number {
+            position: absolute;
+            bottom: 40px;
+            right: 60px;
+            font-family: var(--font-display);
+            font-size: 120px;
+            color: var(--grey-dark);
+        }
+
+        /* COORDINATES SECTION */
+        .coordinates-section {
+            background: var(--white);
+            padding: 120px 60px;
+            text-align: center;
+        }
+
+        .coordinates-banner {
+            background: var(--black);
+            color: var(--white);
+            font-family: var(--font-display);
+            font-size: 24px;
+            text-transform: uppercase;
+            padding: 20px;
+            margin-bottom: 60px;
+        }
+
+        .ukraine-map {
+            width: 560px;
+            max-width: 90vw;
+            margin: 0 auto 40px;
+            display: block;
+        }
+
+        .ukraine-map img {
+            width: 100%;
+            height: auto;
+            display: block;
+            filter: drop-shadow(0 2px 16px rgba(0, 0, 0, 0.22));
+        }
+
+        .coordinates-text {
+            font-family: var(--font-display);
+            font-size: 24px;
+            text-transform: uppercase;
+        }
+
+        /* PRODUCT SECTION */
+        .product-section {
+            padding: 120px 60px;
+            background: var(--grey-light);
+        }
+
+        .product-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+
+        .product-title {
+            font-family: var(--font-display);
+            font-size: 64px;
+            text-transform: uppercase;
+        }
+
+        .product-count {
+            background: var(--black);
+            color: var(--white);
+            font-family: var(--font-body);
+            font-size: 12px;
+            padding: 8px 16px;
+            border-radius: var(--radius-pill);
+        }
+
+        .filter-tabs {
+            display: flex;
+            gap: 24px;
+            margin-bottom: 40px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 16px;
+        }
+
+        .filter-tab {
+            background: none;
+            border: none;
+            font-family: var(--font-body);
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            cursor: pointer;
+            padding: 8px 0;
+            color: var(--grey-mid);
+            transition: var(--transition);
+        }
+
+        .filter-tab.active {
+            color: var(--black);
+            border-bottom: 2px solid var(--black);
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+
+        .product-card {
+            background: var(--white);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .product-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .product-image-container {
+            position: relative;
+            aspect-ratio: 3/4;
+            background: var(--black);
+            overflow: hidden;
+        }
+
+        .product-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: opacity 0.35s ease;
+        }
+
+        .product-image.secondary {
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+        }
+
+        .product-card:hover .product-image.secondary {
+            opacity: 1;
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background: var(--black);
+            color: var(--white);
+            font-size: 10px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 6px 12px;
+            border-radius: var(--radius-pill);
+        }
+
+        .quick-add-btn {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--white);
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .product-card:hover .quick-add-btn {
+            opacity: 1;
+        }
+
+        .product-sizes {
+            display: flex;
+            gap: 8px;
+            padding: 12px;
+            flex-wrap: wrap;
+        }
+
+        .size-chip {
+            font-size: 10px;
+            padding: 4px 8px;
+            border: 1px solid #ddd;
+            border-radius: var(--radius-sm);
+        }
+
+        .size-chip.sold-out {
+            text-decoration: line-through;
+            color: var(--grey-mid);
+        }
+
+        .product-info {
+            padding: 12px;
+        }
+
+        .product-name {
+            font-family: var(--font-display);
+            font-size: 18px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .product-price {
+            font-family: var(--font-body);
+            font-size: 14px;
+            color: var(--accent);
+            font-weight: 500;
+        }
+
+        /* MODAL */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 300;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+            animation: fadeIn 0.2s ease;
+        }
+
+        .modal {
+            background: var(--white);
+            max-width: 960px;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 55% 45%;
+            max-height: 90vh;
+            overflow: hidden;
+            animation: scaleIn 0.2s ease;
+        }
+
+        @keyframes scaleIn {
+            from {
+                transform: scale(0.95);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .modal-left {
+            background: var(--black);
+            padding: 40px;
+        }
+
+        .modal-main-image {
+            width: 100%;
+            aspect-ratio: 3/4;
+            object-fit: cover;
+            margin-bottom: 16px;
+        }
+
+        .modal-thumbnails {
+            display: flex;
+            gap: 8px;
+        }
+
+        .modal-thumbnail {
+            width: 80px;
+            height: 100px;
+            object-fit: cover;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: var(--transition);
+        }
+
+        .modal-thumbnail.active {
+            border-color: var(--white);
+        }
+
+        .modal-right {
+            padding: 40px;
+            overflow-y: auto;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--white);
+            border: none;
+            font-size: 24px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .modal-badge {
+            background: var(--black);
+            color: var(--white);
+            font-size: 10px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 6px 12px;
+            border-radius: var(--radius-pill);
+            display: inline-block;
+            margin-bottom: 16px;
+        }
+
+        .modal-product-name {
+            font-family: var(--font-display);
+            font-size: 32px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .modal-product-price {
+            font-size: 24px;
+            color: var(--accent);
+            font-weight: 500;
+            margin-bottom: 24px;
+        }
+
+        .modal-divider {
+            height: 1px;
+            background: #ddd;
+            margin: 24px 0;
+        }
+
+        .modal-material {
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--grey-mid);
+            margin-bottom: 8px;
+        }
+
+        .modal-description {
+            font-size: 14px;
+            line-height: 1.7;
+            margin-bottom: 24px;
+        }
+
+        .size-selector-label {
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .size-selector {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin-bottom: 24px;
+        }
+
+        .size-option {
+            padding: 12px;
+            border: 1px solid #ddd;
+            background: var(--white);
+            font-family: var(--font-body);
+            font-size: 12px;
+            font-weight: 500;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .size-option:hover {
+            border-color: var(--black);
+        }
+
+        .size-option.selected {
+            background: var(--black);
+            color: var(--white);
+            border-color: var(--black);
+        }
+
+        .size-option.sold-out {
+            text-decoration: line-through;
+            color: var(--grey-mid);
+            cursor: not-allowed;
+        }
+
+        .add-to-basket-btn {
+            width: 100%;
+            background: var(--black);
+            color: var(--white);
+            font-family: var(--font-display);
+            font-size: 16px;
+            text-transform: uppercase;
+            border: none;
+            padding: 16px;
+            height: 52px;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-bottom: 16px;
+        }
+
+        .add-to-basket-btn:hover {
+            background: var(--accent);
+        }
+
+        .add-to-basket-btn:disabled {
+            background: var(--grey-mid);
+            cursor: not-allowed;
+        }
+
+        .impact-note {
+            font-size: 11px;
+            color: var(--grey-mid);
+            text-align: center;
+            margin-bottom: 16px;
+            padding: 12px;
+            background: var(--grey-light);
+        }
+
+        .ukraine-flag {
+            display: inline-block;
+            width: 20px;
+            height: 12px;
+            background: linear-gradient(180deg, #0057B7 50%, #FFD700 50%);
+            margin-right: 4px;
+        }
+
+        .modal-coordinates {
+            font-size: 10px;
+            color: var(--grey-mid);
+            text-align: center;
+        }
+
+        /* CART DRAWER */
+        .cart-drawer {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 100%;
+            max-width: 400px;
+            height: 100vh;
+            background: var(--white);
+            z-index: 400;
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cart-drawer.active {
+            transform: translateX(0);
+        }
+
+        .cart-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 350;
+        }
+
+        .cart-overlay.active {
+            display: block;
+        }
+
+        .cart-header {
+            padding: 24px;
+            border-bottom: 1px solid #ddd;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .cart-title {
+            font-family: var(--font-display);
+            font-size: 24px;
+            text-transform: uppercase;
+        }
+
+        .cart-close {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .cart-items {
+            flex: 1;
+            overflow-y: auto;
+            padding: 24px;
+        }
+
+        .cart-empty {
+            text-align: center;
+            padding: 60px 24px;
+        }
+
+        .cart-empty-title {
+            font-family: var(--font-display);
+            font-size: 20px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .cart-empty-text {
+            font-size: 12px;
+            color: var(--grey-mid);
+        }
+
+        .cart-item {
+            display: grid;
+            grid-template-columns: 80px 1fr auto;
+            gap: 16px;
+            padding-bottom: 16px;
+            margin-bottom: 16px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .cart-item-image {
+            width: 80px;
+            height: 100px;
+            object-fit: cover;
+            background: var(--black);
+        }
+
+        .cart-item-details {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .cart-item-name {
+            font-family: var(--font-display);
+            font-size: 14px;
+            text-transform: uppercase;
+        }
+
+        .cart-item-size {
+            font-size: 12px;
+            color: var(--grey-mid);
+        }
+
+        .cart-item-price {
+            font-size: 14px;
+            color: var(--accent);
+            font-weight: 500;
+        }
+
+        .cart-item-qty {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .qty-btn {
+            width: 24px;
+            height: 24px;
+            border: 1px solid #ddd;
+            background: var(--white);
+            cursor: pointer;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cart-item-remove {
+            align-self: flex-start;
+            background: none;
+            border: none;
+            font-size: 18px;
+            cursor: pointer;
+            color: var(--grey-mid);
+        }
+
+        .cart-footer {
+            padding: 24px;
+            border-top: 1px solid #ddd;
+        }
+
+        .cart-subtotal {
+            display: flex;
+            justify-content: space-between;
+            font-family: var(--font-body);
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 16px;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            background: var(--black);
+            color: var(--white);
+            font-family: var(--font-display);
+            font-size: 16px;
+            text-transform: uppercase;
+            border: none;
+            padding: 16px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .checkout-btn:hover {
+            background: var(--accent);
+        }
+
+        /* GALLERY SECTION */
+        .gallery-section {
+            padding: 120px 60px;
+            background: var(--white);
+        }
+
+        .gallery-title {
+            font-family: var(--font-display);
+            font-size: 64px;
+            text-transform: uppercase;
+            margin-bottom: 60px;
+        }
+
+        .gallery-grid {
+            columns: 3;
+            column-gap: 12px;
+        }
+
+        .gallery-item {
+            break-inside: avoid;
+            margin-bottom: 12px;
+            overflow: hidden;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.45s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.04);
+        }
+
+        /* LIGHTBOX */
+        .lightbox {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.95);
+            z-index: 500;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox img {
+            max-width: 90vw;
+            max-height: 90vh;
+            object-fit: contain;
+            animation: scaleIn 0.2s ease;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 24px;
+            right: 24px;
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 36px;
+            cursor: pointer;
+            line-height: 1;
+        }
+
+        .lightbox-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 48px;
+            cursor: pointer;
+            padding: 16px;
+            line-height: 1;
+            opacity: 0.7;
+            transition: opacity 0.2s;
+        }
+
+        .lightbox-arrow:hover { opacity: 1; }
+        .lightbox-prev { left: 16px; }
+        .lightbox-next { right: 16px; }
+
+        @media (max-width: 900px) {
+            .gallery-grid { columns: 2; }
+            .gallery-section { padding: 80px 24px; }
+            .gallery-title { font-size: 40px; }
+        }
+
+        @media (max-width: 500px) {
+            .gallery-grid { columns: 1; }
+        }
+
+        /* SOCIAL PROOF SECTION */
+        .social-proof {
+            position: relative;
+            padding: 0;
+        }
+
+        .lifestyle-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(2, 300px);
+        }
+
+        .lifestyle-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: filter 0.3s ease;
+            filter: grayscale(0.3);
+        }
+
+        .lifestyle-image:hover {
+            filter: grayscale(0);
+        }
+
+        .social-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: var(--white);
+            font-family: var(--font-display);
+            font-size: clamp(32px, 6vw, 72px);
+            text-transform: uppercase;
+            line-height: 1;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+            pointer-events: none;
+        }
+
+        .instagram-link {
+            text-align: center;
+            padding: 40px;
+            background: var(--white);
+            font-family: var(--font-body);
+            font-size: 12px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .instagram-link a {
+            color: var(--black);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .instagram-link a:hover {
+            color: var(--accent);
+        }
+
+        /* MISSION SECTION */
+        .mission-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .mission-left {
+            background: var(--black);
+            color: var(--white);
+            padding: 120px 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 24px;
+        }
+
+        .mission-word {
+            font-family: var(--font-display);
+            font-size: clamp(48px, 8vw, 64px);
+            text-transform: uppercase;
+            line-height: 1;
+        }
+
+        .mission-right {
+            background: var(--white);
+            padding: 120px 60px;
+        }
+
+        .mission-heading {
+            font-family: var(--font-display);
+            font-size: 32px;
+            text-transform: uppercase;
+            margin-bottom: 40px;
+        }
+
+        .mission-stat {
+            padding: 24px 0;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .mission-stat-label {
+            font-family: var(--font-body);
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .mission-stat-value {
+            font-family: var(--font-body);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        /* NEWSLETTER SECTION */
+        .newsletter-section {
+            background: var(--black);
+            color: var(--white);
+            padding: 120px 60px;
+            text-align: center;
+        }
+
+        .newsletter-logo {
+            font-family: var(--font-logo);
+            font-size: 48px;
+            margin-bottom: 32px;
+        }
+
+        .newsletter-heading {
+            font-family: var(--font-display);
+            font-size: 36px;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+        }
+
+        .newsletter-body {
+            font-family: var(--font-body);
+            font-size: 14px;
+            margin-bottom: 32px;
+            color: var(--grey-mid);
+        }
+
+        .newsletter-form {
+            max-width: 500px;
+            margin: 0 auto 24px;
+            display: flex;
+            gap: 8px;
+        }
+
+        .newsletter-input {
+            flex: 1;
+            background: var(--grey-dark);
+            color: var(--white);
+            border: none;
+            padding: 14px 20px;
+            font-family: var(--font-body);
+            font-size: 14px;
+        }
+
+        .newsletter-btn {
+            background: var(--white);
+            color: var(--black);
+            font-family: var(--font-display);
+            font-size: 14px;
+            text-transform: uppercase;
+            border: none;
+            padding: 14px 32px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .newsletter-btn:hover {
+            background: var(--accent);
+            color: var(--white);
+        }
+
+        .newsletter-success {
+            font-family: var(--font-body);
+            font-size: 16px;
+            padding: 20px;
+        }
+
+        .newsletter-subtext {
+            font-size: 10px;
+            color: var(--grey-dark);
+        }
+
+        /* FOOTER */
+        footer {
+            background: var(--white);
+            border-top: 1px solid #ddd;
+            padding: 60px 60px 24px;
+        }
+
+        .footer-columns {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h4 {
+            font-family: var(--font-body);
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 8px;
+        }
+
+        .footer-column ul li a {
+            font-family: var(--font-body);
+            font-size: 12px;
+            color: var(--grey-mid);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-column ul li a:hover {
+            color: var(--black);
+        }
+
+        .footer-bottom {
+            padding-top: 24px;
+            border-top: 1px solid #ddd;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 11px;
+            color: var(--grey-mid);
+        }
+
+        /* SCROLL REVEAL */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* PULSE ANIMATION */
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.2);
+            }
+        }
+
+        .pulse {
+            animation: pulse 0.3s ease;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 1024px) {
+            .product-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .hero {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-left {
+                min-height: 400px;
+            }
+
+            .brand-story,
+            .mission-section {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .footer-columns {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+
+            .nav-center,
+            .nav-right a:first-child {
+                display: none;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .modal {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-left {
+                padding: 24px;
+            }
+
+            .lifestyle-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-columns {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .size-selector {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ANNOUNCEMENT BAR -->
+    <div class="announcement-bar" id="announcementBar">
+        <div class="marquee-container">
+            <div class="marquee">
+                <span>FREE SHIPPING OVER €50 · DESIGNED BY UKRAINIANS · WORN EVERYWHERE · NEW DROP NOW LIVE · 50.4504°N,
+                    30.5245°E ·</span>
+                <span>FREE SHIPPING OVER €50 · DESIGNED BY UKRAINIANS · WORN EVERYWHERE · NEW DROP NOW LIVE · 50.4504°N,
+                    30.5245°E ·</span>
+            </div>
+        </div>
+        <button class="close-announcement" onclick="closeAnnouncement()">×</button>
+    </div>
+
+    <!-- NAVIGATION -->
+    <nav>
+        <a href="#" class="logo-lockup">
+            <span class="logo-dot">.</span><span class="logo-com">com</span>
+        </a>
+        <div class="nav-center">
+            <a href="#hero">HOME</a>
+            <a href="#story">ABOUT</a>
+            <a href="#mission">PROJECT</a>
+            <a href="#products">SHOP</a>
+            <a href="#gallery">GALLERY</a>
+        </div>
+        <div class="nav-right">
+            <a href="#contact">CONTACT</a>
+            <button class="cart-btn" onclick="toggleCart()">
+                SHOPPING BAG <span class="cart-count" id="cartCount">0</span>
+            </button>
+        </div>
+        <button class="hamburger" onclick="toggleMobileMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </nav>
+
+    <!-- MOBILE MENU -->
+    <div class="mobile-menu" id="mobileMenu">
+        <button class="mobile-close" onclick="toggleMobileMenu()">×</button>
+        <a href="#hero" onclick="toggleMobileMenu()">HOME</a>
+        <a href="#story" onclick="toggleMobileMenu()">ABOUT</a>
+        <a href="#mission" onclick="toggleMobileMenu()">PROJECT</a>
+        <a href="#products" onclick="toggleMobileMenu()">SHOP</a>
+        <a href="#contact" onclick="toggleMobileMenu()">CONTACT</a>
+    </div>
+
+    <!-- HERO SECTION -->
+    <section class="hero" id="hero">
+        <div class="hero-left">
+            <img src="com/IMG_6767.JPEG" alt="Dot Com Studio T-Shirt Editorial">
+            <div class="hero-overlay-text">
+                SEPARATED BY WAR<br>UNITED BY PEOPLE
+            </div>
+        </div>
+        <div class="hero-right">
+            <h1 class="hero-headline">DESIGNED BY UKRAINIANS</h1>
+            <p class="hero-subline">WORN EVERYWHERE | ONLINE PRE-ORDER</p>
+            <button class="cta-btn" onclick="scrollToProducts()">ADD TO BASKET</button>
+        </div>
+    </section>
+
+    <!-- BRAND STORY SECTION -->
+    <section class="brand-story reveal" id="story">
+        <div class="story-left">
+            WHERE<br>STRATEGY<br>MEETS<br>IDENTITY
+        </div>
+        <div class="story-right">
+            <p>DOT COM IS MORE THAN STREETWEAR — IT'S A CULTURAL CONNECTOR. FOLLOWING THE DISPLACEMENT OF MILLIONS OF
+                UKRAINIANS ACROSS EUROPE, OUR STRATEGY IS TO REBUILD COMMUNITY THROUGH WEARABLE IDENTITY.</p>
+            <p><span class="highlight">KYIV TODAY. LVIV, KHARKIV, ODESA TOMORROW.</span></p>
+            <p><span class="highlight">FROM IRELAND TO GERMANY TO POLAND — DOT COM TURNS CLOTHING INTO
+                    CONNECTION.</span></p>
+        </div>
+        <div class="section-number">01</div>
+    </section>
+
+    <!-- COORDINATES SECTION -->
+    <section class="coordinates-section reveal">
+        <div class="coordinates-banner">UNITE UKRAINIANS WITH CULTURE & DESIGN</div>
+        <div class="ukraine-map">
+            <img src="com/ukraine.svg" alt="Map of Ukraine" width="612" height="408">
+        </div>
+        <div class="coordinates-text">50.4504° N, 30.5245° E · UKRAINE</div>
+    </section>
+
+    <!-- PRODUCT SECTION -->
+    <section class="product-section reveal" id="products">
+        <div class="product-header">
+            <h2 class="product-title">THE DROP</h2>
+            <span class="product-count" id="productCount">3 ITEMS</span>
+        </div>
+
+        <div class="filter-tabs">
+            <button class="filter-tab active" data-filter="all">ALL</button>
+            <button class="filter-tab" data-filter="tshirts">T-SHIRTS</button>
+        </div>
+
+        <div class="product-grid" id="productGrid"></div>
+    </section>
+
+    <!-- GALLERY SECTION -->
+    <section class="gallery-section reveal" id="gallery">
+        <h2 class="gallery-title">GALLERY</h2>
+        <div class="gallery-grid" id="galleryGrid">
+            <div class="gallery-item" onclick="openLightbox(0)"><img src="com/gallery/000341680029 (1).jpg" alt="Gallery"></div>
+            <div class="gallery-item" onclick="openLightbox(1)"><img src="com/gallery/000341680029.jpg" alt="Gallery"></div>
+            <div class="gallery-item" onclick="openLightbox(2)"><img src="com/gallery/E2E387A7-E70A-4BA0-9FBD-C40B7FC75C2C.JPG" alt="Gallery"></div>
+            <div class="gallery-item" onclick="openLightbox(3)"><img src="com/gallery/IMG_6740.JPEG" alt="Gallery"></div>
+            <div class="gallery-item" onclick="openLightbox(4)"><img src="com/gallery/IMG_6746 (1).JPEG" alt="Gallery"></div>
+            <div class="gallery-item" onclick="openLightbox(5)"><img src="com/gallery/IMG_6746.JPEG" alt="Gallery"></div>
+            <div class="gallery-item" onclick="openLightbox(6)"><img src="com/gallery/IMG_6752.JPEG" alt="Gallery"></div>
+            <div class="gallery-item" onclick="openLightbox(7)"><img src="com/gallery/IMG_6767.JPEG" alt="Gallery"></div>
+            <div class="gallery-item" onclick="openLightbox(8)"><img src="com/gallery/IMG_6770.JPEG" alt="Gallery"></div>
+            <div class="gallery-item" onclick="openLightbox(9)"><img src="com/gallery/IMG_6787.PNG" alt="Gallery"></div>
+            <div class="gallery-item" onclick="openLightbox(10)"><img src="com/gallery/IMG_6788.PNG" alt="Gallery"></div>
+            <div class="gallery-item" onclick="openLightbox(11)"><img src="com/gallery/IMG_6799 (1).PNG" alt="Gallery"></div>
+            <div class="gallery-item" onclick="openLightbox(12)"><img src="com/gallery/IMG_6799.PNG" alt="Gallery"></div>
+            <div class="gallery-item" onclick="openLightbox(13)"><img src="com/gallery/IMG_6804.PNG" alt="Gallery"></div>
+            <div class="gallery-item" onclick="openLightbox(14)"><img src="com/gallery/IMG_6807.PNG" alt="Gallery"></div>
+            <div class="gallery-item" onclick="openLightbox(15)"><img src="com/gallery/IMG_6808.PNG" alt="Gallery"></div>
+            <div class="gallery-item" onclick="openLightbox(16)"><img src="com/gallery/IMG_6810.PNG" alt="Gallery"></div>
+            <div class="gallery-item" onclick="openLightbox(17)"><img src="com/gallery/IMG_6812.PNG" alt="Gallery"></div>
+            <div class="gallery-item" onclick="openLightbox(18)"><img src="com/gallery/IMG_7288.JPG" alt="Gallery"></div>
+            <div class="gallery-item" onclick="openLightbox(19)"><img src="com/gallery/IMG_7289.JPG" alt="Gallery"></div>
+            <div class="gallery-item" onclick="openLightbox(20)"><img src="com/gallery/IMG_7293 2.JPG" alt="Gallery"></div>
+            <div class="gallery-item" onclick="openLightbox(21)"><img src="com/gallery/IMG_7298.JPG" alt="Gallery"></div>
+            <div class="gallery-item" onclick="openLightbox(22)"><img src="com/gallery/IMG_7299.JPG" alt="Gallery"></div>
+            <div class="gallery-item" onclick="openLightbox(23)"><img src="com/gallery/IMG_9379.jpg" alt="Gallery"></div>
+            <div class="gallery-item" onclick="openLightbox(24)"><img src="com/gallery/IMG_9380.jpg" alt="Gallery"></div>
+            <div class="gallery-item" onclick="openLightbox(25)"><img src="com/gallery/IMG_9381.jpg" alt="Gallery"></div>
+        </div>
+    </section>
+
+    <!-- LIGHTBOX -->
+    <div class="lightbox" id="lightbox" onclick="closeLightboxOnBg(event)">
+        <button class="lightbox-close" onclick="closeLightbox()">&#x2715;</button>
+        <button class="lightbox-arrow lightbox-prev" onclick="shiftLightbox(-1)">&#8249;</button>
+        <img id="lightboxImg" src="" alt="Gallery">
+        <button class="lightbox-arrow lightbox-next" onclick="shiftLightbox(1)">&#8250;</button>
+    </div>
+
+    <!-- SOCIAL PROOF SECTION -->
+    <section class="social-proof reveal">
+        <div class="lifestyle-grid">
+            <img src="com/IMG_7289.JPG" alt="Dot Com Lifestyle" class="lifestyle-image">
+            <img src="com/IMG_7288.JPG" alt="Dot Com Lifestyle" class="lifestyle-image">
+            <img src="com/IMG_6740.JPEG" alt="Dot Com Lifestyle" class="lifestyle-image">
+            <img src="com/IMG_9379.jpg" alt="Dot Com Lifestyle" class="lifestyle-image">
+            <img src="com/IMG_9380.jpg" alt="Dot Com Lifestyle" class="lifestyle-image">
+            <img src="com/IMG_9381.jpg" alt="Dot Com Lifestyle" class="lifestyle-image">
+        </div>
+        <div class="social-overlay">
+            .com<br>SEPARATED BY WAR · UNITED BY PEOPLE
+        </div>
+    </section>
+
+    <div class="instagram-link">
+        <a href="https://instagram.com/dot.com.studio" target="_blank">FOLLOW @DOT.COM.STUDIO →</a>
+    </div>
+
+    <!-- MISSION SECTION -->
+    <section class="mission-section reveal" id="mission">
+        <div class="mission-left">
+            <div class="mission-word">QUALITY.</div>
+            <div class="mission-word">CULTURE.</div>
+            <div class="mission-word">COMMUNITY.</div>
+        </div>
+        <div class="mission-right">
+            <h3 class="mission-heading">WHERE .COM WINS</h3>
+            <div class="mission-stat">
+                <div class="mission-stat-label">AUTHENTIC CULTURAL POSITIONING</div>
+                <div class="mission-stat-value">DOT COM sells identity.</div>
+            </div>
+            <div class="mission-stat">
+                <div class="mission-stat-label">CLEAR MARKET GAP</div>
+                <div class="mission-stat-value">Cultural & premium.</div>
+            </div>
+            <div class="mission-stat">
+                <div class="mission-stat-label">DIASPORA TARGETING</div>
+                <div class="mission-stat-value">Ukrainian community worldwide.</div>
+            </div>
+            <div class="mission-stat">
+                <div class="mission-stat-label">PURPOSE + SOCIAL IMPACT</div>
+                <div class="mission-stat-value">% of sales supports Ukrainian children.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEWSLETTER SECTION -->
+    <section class="newsletter-section reveal">
+        <div class="newsletter-logo"><span class="logo-dot">.</span><span class="logo-com">com</span></div>
+        <h3 class="newsletter-heading">SUBSCRIBE & GET 10% OFF</h3>
+        <p class="newsletter-body">Receive news about drops, restocks, and community events.</p>
+        <form class="newsletter-form" id="newsletterForm" onsubmit="submitNewsletter(event)">
+            <input type="email" class="newsletter-input" placeholder="YOUR EMAIL" required>
+            <button type="submit" class="newsletter-btn">SIGN UP</button>
+        </form>
+        <div class="newsletter-subtext">50.4504°N, 30.5245°E · DOTCOMSTUDIO.COM</div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-columns">
+            <div class="footer-column">
+                <h4>CONTACT</h4>
+                <ul>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#faq">FAQs</a></li>
+                    <li><a href="#chat">Live Chat</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>ORDERS</h4>
+                <ul>
+                    <li><a href="#account">My Account</a></li>
+                    <li><a href="#track">Track Order</a></li>
+                    <li><a href="#returns">Returns</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>COMPANY</h4>
+                <ul>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#privacy">Privacy Policy</a></li>
+                    <li><a href="#shipping">Shipping</a></li>
+                    <li><a href="#careers">Careers</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>SOCIAL</h4>
+                <ul>
+                    <li><a href="https://instagram.com/dot.com.studio" target="_blank">Instagram</a></li>
+                    <li><a href="#tiktok">TikTok</a></li>
+                    <li><a href="#facebook">Facebook</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div>.com ® DESIGNED BY UKRAINIANS | WORN EVERYWHERE</div>
+            <div>50.4504°N, 30.5245°E</div>
+        </div>
+    </footer>
+
+    <!-- PRODUCT MODAL -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal">
+            <button class="modal-close" onclick="closeModal()">×</button>
+            <div class="modal-left">
+                <img id="modalMainImage" class="modal-main-image" src="" alt="">
+                <div class="modal-thumbnails" id="modalThumbnails"></div>
+            </div>
+            <div class="modal-right">
+                <div class="modal-badge" id="modalBadge"></div>
+                <h3 class="modal-product-name" id="modalName"></h3>
+                <div class="modal-product-price" id="modalPrice"></div>
+                <div class="modal-divider"></div>
+                <div class="modal-material" id="modalMaterial"></div>
+                <p class="modal-description" id="modalDescription"></p>
+                <label class="size-selector-label">SELECT SIZE</label>
+                <div class="size-selector" id="modalSizeSelector"></div>
+                <button class="add-to-basket-btn" id="addToBasketBtn" onclick="addToCart()">ADD TO BASKET</button>
+                <div class="impact-note">
+                    <span class="ukraine-flag"></span> % OF PROCEEDS SUPPORT UKRAINIAN CHILDREN
+                </div>
+                <div class="modal-coordinates">50.4504°N, 30.5245°E</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CART DRAWER -->
+    <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+    <div class="cart-drawer" id="cartDrawer">
+        <div class="cart-header">
+            <h3 class="cart-title">.com BAG</h3>
+            <button class="cart-close" onclick="toggleCart()">×</button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <div class="cart-empty">
+                <div class="cart-empty-title">YOUR BAG IS EMPTY</div>
+                <div class="cart-empty-text">50.4504°N, 30.5245°E</div>
+            </div>
+        </div>
+        <div class="cart-footer" id="cartFooter" style="display: none;">
+            <div class="cart-subtotal">
+                <span>SUBTOTAL</span>
+                <span id="cartSubtotal">€0</span>
+            </div>
+            <button class="checkout-btn">CHECKOUT →</button>
+        </div>
+    </div>
+
+    <script>
+        // PRODUCT DATA
+        const products = [
+            {
+                id: 1,
+                name: "DOT COM GRAPHIC T-SHIRT",
+                price: "€36",
+                priceValue: 36,
+                badge: "PRE-ORDER",
+                description: "DOT COM is more than streetwear — it's a statement. Crafted from 100% heavy cotton, 260gsm. Front: ghosted figure print. Back: Kyiv coordinates repeated in hand-script. Oversized fit.",
+                material: "100% Cotton · 260gsm · Oversized",
+                images: ["com/ready tee copy.png", "com/ready tee back copy 2.png"],
+                sizes: ["XS", "S", "M", "L", "XL", "XXL"],
+                soldOut: [],
+                category: "tshirts"
+            }
+        ];
+
+        // STATE
+        let cart = [];
+        let selectedProduct = null;
+        let selectedSize = null;
+        let currentFilter = 'all';
+
+        // INIT
+        document.addEventListener('DOMContentLoaded', () => {
+            renderProducts();
+            setupFilterTabs();
+            setupScrollReveal();
+        });
+
+        // RENDER PRODUCTS
+        function renderProducts() {
+            const grid = document.getElementById('productGrid');
+            const filteredProducts = currentFilter === 'all'
+                ? products
+                : products.filter(p => p.category === currentFilter);
+
+            grid.innerHTML = filteredProducts.map(product => `
+                <div class="product-card" onclick="openModal(${product.id})">
+                    <div class="product-image-container">
+                        <img src="${product.images[0]}" alt="${product.name}" class="product-image">
+                        <img src="${product.images[1] || product.images[0]}" alt="${product.name}" class="product-image secondary">
+                        <div class="product-badge">${product.badge}</div>
+                        <button class="quick-add-btn" onclick="event.stopPropagation(); openModal(${product.id})">+</button>
+                    </div>
+                    <div class="product-sizes">
+                        ${product.sizes.map(size => `
+                            <span class="size-chip ${product.soldOut.includes(size) ? 'sold-out' : ''}">${size}</span>
+                        `).join('')}
+                    </div>
+                    <div class="product-info">
+                        <div class="product-name">${product.name}</div>
+                        <div class="product-price">${product.price}</div>
+                    </div>
+                </div>
+            `).join('');
+
+            document.getElementById('productCount').textContent = `${filteredProducts.length} ITEM${filteredProducts.length !== 1 ? 'S' : ''}`;
+        }
+
+        // FILTER TABS
+        function setupFilterTabs() {
+            const tabs = document.querySelectorAll('.filter-tab');
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    currentFilter = tab.dataset.filter;
+                    renderProducts();
+                });
+            });
+        }
+
+        // MODAL
+        function openModal(productId) {
+            selectedProduct = products.find(p => p.id === productId);
+            selectedSize = null;
+
+            document.getElementById('modalBadge').textContent = selectedProduct.badge;
+            document.getElementById('modalName').textContent = selectedProduct.name;
+            document.getElementById('modalPrice').textContent = selectedProduct.price;
+            document.getElementById('modalMaterial').textContent = `MATERIAL: ${selectedProduct.material}`;
+            document.getElementById('modalDescription').textContent = selectedProduct.description;
+            document.getElementById('modalMainImage').src = selectedProduct.images[0];
+
+            // Thumbnails
+            const thumbnailsContainer = document.getElementById('modalThumbnails');
+            thumbnailsContainer.innerHTML = selectedProduct.images.map((img, idx) => `
+                <img src="${img}" class="modal-thumbnail ${idx === 0 ? 'active' : ''}" onclick="changeModalImage('${img}', this)">
+            `).join('');
+
+            // Size selector
+            const sizeSelector = document.getElementById('modalSizeSelector');
+            sizeSelector.innerHTML = selectedProduct.sizes.map(size => `
+                <button class="size-option ${selectedProduct.soldOut.includes(size) ? 'sold-out' : ''}"
+                        onclick="selectSize('${size}')"
+                        ${selectedProduct.soldOut.includes(size) ? 'disabled' : ''}>
+                    ${size}
+                </button>
+            `).join('');
+
+            document.getElementById('addToBasketBtn').disabled = true;
+            document.getElementById('modalOverlay').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('modalOverlay').classList.remove('active');
+            document.body.style.overflow = '';
+            selectedProduct = null;
+            selectedSize = null;
+        }
+
+        function changeModalImage(src, element) {
+            document.getElementById('modalMainImage').src = src;
+            document.querySelectorAll('.modal-thumbnail').forEach(thumb => {
+                thumb.classList.remove('active');
+            });
+            element.classList.add('active');
+        }
+
+        function selectSize(size) {
+            if (selectedProduct.soldOut.includes(size)) return;
+
+            selectedSize = size;
+            document.querySelectorAll('.size-option').forEach(opt => {
+                opt.classList.remove('selected');
+            });
+            event.target.classList.add('selected');
+            document.getElementById('addToBasketBtn').disabled = false;
+        }
+
+        function addToCart() {
+            if (!selectedSize) return;
+
+            const btn = document.getElementById('addToBasketBtn');
+            btn.textContent = 'ADDING...';
+
+            setTimeout(() => {
+                cart.push({
+                    ...selectedProduct,
+                    selectedSize: selectedSize,
+                    quantity: 1
+                });
+
+                btn.textContent = 'ADDED ✓';
+                updateCartCount();
+
+                setTimeout(() => {
+                    btn.textContent = 'ADD TO BASKET';
+                    closeModal();
+                    toggleCart();
+                }, 1000);
+            }, 500);
+        }
+
+        // CART
+        function updateCartCount() {
+            const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+            const countEl = document.getElementById('cartCount');
+            countEl.textContent = count;
+            countEl.classList.add('pulse');
+            setTimeout(() => countEl.classList.remove('pulse'), 300);
+        }
+
+        function toggleCart() {
+            const drawer = document.getElementById('cartDrawer');
+            const overlay = document.getElementById('cartOverlay');
+            const isActive = drawer.classList.contains('active');
+
+            if (isActive) {
+                drawer.classList.remove('active');
+                overlay.classList.remove('active');
+                document.body.style.overflow = '';
+            } else {
+                drawer.classList.add('active');
+                overlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+                renderCart();
+            }
+        }
+
+        function renderCart() {
+            const cartItemsContainer = document.getElementById('cartItems');
+            const cartFooter = document.getElementById('cartFooter');
+
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = `
+                    <div class="cart-empty">
+                        <div class="cart-empty-title">YOUR BAG IS EMPTY</div>
+                        <div class="cart-empty-text">50.4504°N, 30.5245°E</div>
+                    </div>
+                `;
+                cartFooter.style.display = 'none';
+            } else {
+                cartItemsContainer.innerHTML = cart.map((item, idx) => `
+                    <div class="cart-item">
+                        <img src="${item.images[0]}" class="cart-item-image" alt="${item.name}">
+                        <div class="cart-item-details">
+                            <div class="cart-item-name">${item.name}</div>
+                            <div class="cart-item-size">SIZE: ${item.selectedSize}</div>
+                            <div class="cart-item-price">${item.price}</div>
+                            <div class="cart-item-qty">
+                                <button class="qty-btn" onclick="updateQuantity(${idx}, -1)">−</button>
+                                <span>${item.quantity}</span>
+                                <button class="qty-btn" onclick="updateQuantity(${idx}, 1)">+</button>
+                            </div>
+                        </div>
+                        <button class="cart-item-remove" onclick="removeFromCart(${idx})">×</button>
+                    </div>
+                `).join('');
+
+                const subtotal = cart.reduce((sum, item) => sum + (item.priceValue * item.quantity), 0);
+                document.getElementById('cartSubtotal').textContent = `€${subtotal}`;
+                cartFooter.style.display = 'block';
+            }
+        }
+
+        function updateQuantity(idx, change) {
+            cart[idx].quantity += change;
+            if (cart[idx].quantity <= 0) {
+                cart.splice(idx, 1);
+            }
+            updateCartCount();
+            renderCart();
+        }
+
+        function removeFromCart(idx) {
+            cart.splice(idx, 1);
+            updateCartCount();
+            renderCart();
+        }
+
+        // UTILITY FUNCTIONS
+        function closeAnnouncement() {
+            document.getElementById('announcementBar').style.display = 'none';
+        }
+
+        function scrollToProducts() {
+            document.getElementById('products').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function toggleMobileMenu() {
+            document.getElementById('mobileMenu').classList.toggle('active');
+            document.body.style.overflow = document.getElementById('mobileMenu').classList.contains('active') ? 'hidden' : '';
+        }
+
+        function submitNewsletter(e) {
+            e.preventDefault();
+            const form = document.getElementById('newsletterForm');
+            form.innerHTML = '<div class="newsletter-success">YOU\'RE ON THE LIST ✓</div>';
+        }
+
+        // SCROLL REVEAL
+        function setupScrollReveal() {
+            const reveals = document.querySelectorAll('.reveal');
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, {
+                threshold: 0.15
+            });
+
+            reveals.forEach(reveal => observer.observe(reveal));
+        }
+
+        // ESC KEY TO CLOSE MODAL + LIGHTBOX
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeModal();
+                closeLightbox();
+                if (document.getElementById('cartDrawer').classList.contains('active')) {
+                    toggleCart();
+                }
+            }
+            if (e.key === 'ArrowRight') shiftLightbox(1);
+            if (e.key === 'ArrowLeft') shiftLightbox(-1);
+        });
+
+        // GALLERY LIGHTBOX
+        const galleryImages = [
+            'com/gallery/000341680029 (1).jpg',
+            'com/gallery/000341680029.jpg',
+            'com/gallery/E2E387A7-E70A-4BA0-9FBD-C40B7FC75C2C.JPG',
+            'com/gallery/IMG_6740.JPEG',
+            'com/gallery/IMG_6746 (1).JPEG',
+            'com/gallery/IMG_6746.JPEG',
+            'com/gallery/IMG_6752.JPEG',
+            'com/gallery/IMG_6767.JPEG',
+            'com/gallery/IMG_6770.JPEG',
+            'com/gallery/IMG_6787.PNG',
+            'com/gallery/IMG_6788.PNG',
+            'com/gallery/IMG_6799 (1).PNG',
+            'com/gallery/IMG_6799.PNG',
+            'com/gallery/IMG_6804.PNG',
+            'com/gallery/IMG_6807.PNG',
+            'com/gallery/IMG_6808.PNG',
+            'com/gallery/IMG_6810.PNG',
+            'com/gallery/IMG_6812.PNG',
+            'com/gallery/IMG_7288.JPG',
+            'com/gallery/IMG_7289.JPG',
+            'com/gallery/IMG_7293 2.JPG',
+            'com/gallery/IMG_7298.JPG',
+            'com/gallery/IMG_7299.JPG',
+            'com/gallery/IMG_9379.jpg',
+            'com/gallery/IMG_9380.jpg',
+            'com/gallery/IMG_9381.jpg'
+        ];
+
+        let currentLightboxIndex = 0;
+
+        function openLightbox(index) {
+            currentLightboxIndex = index;
+            document.getElementById('lightboxImg').src = galleryImages[index];
+            document.getElementById('lightbox').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        function shiftLightbox(dir) {
+            if (!document.getElementById('lightbox').classList.contains('active')) return;
+            currentLightboxIndex = (currentLightboxIndex + dir + galleryImages.length) % galleryImages.length;
+            document.getElementById('lightboxImg').src = galleryImages[currentLightboxIndex];
+        }
+
+        function closeLightboxOnBg(e) {
+            if (e.target === document.getElementById('lightbox')) closeLightbox();
+        }
+    </script>
+
+</body>
+
+</html>
